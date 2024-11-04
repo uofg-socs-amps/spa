@@ -1,7 +1,0 @@
-{
-  "projects": [
-    { "internal_id": "abcd-123", "successfully_created": 1 },
-    { "internal_id": "efgh-456", "successfully_created": 1 },
-    { "internal_id": "ijkl-789", "successfully_created": 0 }
-  ]
-}

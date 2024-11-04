@@ -1,8 +1,0 @@
-{
-  "supervisors": [
-    { "guid": "1234567a", "exists": 1 },
-    { "guid": "7654321a", "exists": 1 },
-    { "guid": "3456789a", "exists": 0 },
-    { "guid": "9876543a", "exists": 0 }
-  ]
-}
