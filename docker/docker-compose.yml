@@ -8,7 +8,7 @@ services:
     volumes:
       - spa-db-data:/var/lib/postgres/data/
     environment:
-      POSTGRES_USER: "root"
+      PGUSER: "postgres"
       POSTGRES_PASSWORD: "1234"
       POSTGRES_DB: "allocation-db"
       POSTGRES_HOST_AUTH_METHOD: "trust"
