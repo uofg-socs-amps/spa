@@ -41,15 +41,9 @@ type StableUser = Omit<User, "id"> & { id: string };
 type New<T> = Omit<T, "id" | "systemId">;
 
 const superAdmin: StableUser = {
-  id: env.DEV_P_ID,
-  name: "Petros Kitazos",
-  email: env.DEV_P_EMAIL,
-};
-
-const superAdmin2: StableUser = {
-  id: env.DEV_A_ID,
-  name: "Alyson Dick",
-  email: env.DEV_A_EMAIL,
+  id: env.DEV_ID,
+  name: env.DEV_NAME,
+  email: env.DEV_EMAIL,
 };
 
 const superAdminInSpace: New<AdminInSpace> = {
@@ -58,15 +52,9 @@ const superAdminInSpace: New<AdminInSpace> = {
   allocationSubGroupId: null,
   adminLevel: AdminLevel.SUPER,
 };
-const superAdminInSpace2: New<AdminInSpace> = {
-  userId: superAdmin2.id,
-  allocationGroupId: null,
-  allocationSubGroupId: null,
-  adminLevel: AdminLevel.SUPER,
-};
 
-export const superAdmin_users = [superAdmin, superAdmin2];
-export const superAdmin_levels = [superAdminInSpace, superAdminInSpace2];
+export const superAdmin_users = [superAdmin];
+export const superAdmin_levels = [superAdminInSpace];
 
 export const to_ID = (ID: number) => ID.toString().padStart(3, "0");
 
