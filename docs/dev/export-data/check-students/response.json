@@ -1,8 +1,0 @@
-{
-  "students": [
-    { "matric": 1234567, "exists": 1 },
-    { "matric": 7654321, "exists": 1 },
-    { "matric": 3456789, "exists": 0 },
-    { "matric": 9876543, "exists": 0 }
-  ]
-}
