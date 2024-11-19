@@ -38,7 +38,7 @@ export const institutionRouter = createTRPCRouter({
     const groups = await ctx.db.allocationGroup.findMany({
       select: { displayName: true },
     });
-    return groups.map(({ displayName }) => displayName);
+    return new Set(groups.map(({ displayName }) => displayName));
   }),
 
   createGroup: superAdminProcedure

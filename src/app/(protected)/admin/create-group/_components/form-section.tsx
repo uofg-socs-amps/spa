@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,38 +19,31 @@ import { Separator } from "@/components/ui/separator";
 
 import { api } from "@/lib/trpc/client";
 import { slugify } from "@/lib/utils/general/slugify";
+import {
+  buildNewAllocationGroupFormSchema,
+  NewAllocationGroupForm,
+} from "@/lib/validations/spaces/allocation-group";
 
 import { spacesLabels } from "@/content/spaces";
 
 export function FormSection({
   takenGroupNames,
 }: {
-  takenGroupNames: string[];
+  takenGroupNames: Set<string>;
 }) {
   const router = useRouter();
 
-  const FormSchema = z.object({
-    groupName: z
-      .string()
-      .min(1, "Please enter a name")
-      .refine((item) => {
-        const setOfNames = new Set(takenGroupNames);
-        const nameAllowed = !setOfNames.has(item);
-        return nameAllowed;
-      }, "This name is already taken"),
-  });
+  const formSchema = buildNewAllocationGroupFormSchema(takenGroupNames);
 
-  type FormData = z.infer<typeof FormSchema>;
-
-  const form = useForm<FormData>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<NewAllocationGroupForm>({
+    resolver: zodResolver(formSchema),
     defaultValues: { groupName: "" },
   });
 
   const { mutateAsync: createGroupAsync } =
     api.institution.createGroup.useMutation();
 
-  function onSubmit({ groupName }: { groupName: string }) {
+  function onSubmit({ groupName }: NewAllocationGroupForm) {
     void toast.promise(
       createGroupAsync({ groupName }).then(() => {
         router.push(`/${slugify(groupName)}`);
