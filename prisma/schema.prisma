@@ -239,6 +239,7 @@ model ProjectAllocation {
     projectId            String         @map("project_id")
     userId               String         @map("user_id")
     studentRanking       Int            @map("student_ranking")
+    specialCircumstances String?        @map("special_circumstances")
     // ---
     allocationGroupId    String         @map("allocation_group_id")
     allocationSubGroupId String         @map("allocation_sub_group_id")
