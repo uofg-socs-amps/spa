@@ -1,7 +1,7 @@
 services:
   app:
     image: node:22-alpine 
-    command: sh -c "apk add --no-cache libc6-compat openssl && npm install -g pnpm && pnpm install && pnpm prisma generate && pnpm dev" # Add prisma generate step
+    command: sh -c "apk add --no-cache libc6-compat openssl && npm install -g pnpm && pnpm install && pnpm prisma generate && pnpm dev"
     working_dir: /app 
     volumes:
       - ../:/app
