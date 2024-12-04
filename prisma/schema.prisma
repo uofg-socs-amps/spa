@@ -69,6 +69,7 @@ model UserInInstance {
     // ---
     supervisorInstanceDetails SupervisorInstanceDetails[] @relation(name: "supervisor_details")
     supervisorProjects        Project[]
+    readerProjectAllocations  ProjectAllocationReader[]
 
     @@id(name: "instanceMembership", [userId, allocationGroupId, allocationSubGroupId, allocationInstanceId])
 }
@@ -236,19 +237,32 @@ model SavedPreference {
 }
 
 model ProjectAllocation {
-    projectId            String         @map("project_id")
-    userId               String         @map("user_id")
-    studentRanking       Int            @map("student_ranking")
+    projectId            String                    @map("project_id")
+    userId               String                    @map("user_id")
+    studentRanking       Int                       @map("student_ranking")
     // ---
-    allocationGroupId    String         @map("allocation_group_id")
-    allocationSubGroupId String         @map("allocation_sub_group_id")
-    allocationInstanceId String         @map("allocation_instance_id")
+    allocationGroupId    String                    @map("allocation_group_id")
+    allocationSubGroupId String                    @map("allocation_sub_group_id")
+    allocationInstanceId String                    @map("allocation_instance_id")
     // ---
-    project              Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
-    student              UserInInstance @relation(name: "project_allocation", fields: [userId, allocationGroupId, allocationSubGroupId, allocationInstanceId], references: [userId, allocationGroupId, allocationSubGroupId, allocationInstanceId], onDelete: Cascade)
+    project              Project                   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+    student              UserInInstance            @relation(name: "project_allocation", fields: [userId, allocationGroupId, allocationSubGroupId, allocationInstanceId], references: [userId, allocationGroupId, allocationSubGroupId, allocationInstanceId], onDelete: Cascade)
+    readers              ProjectAllocationReader[]
 
     @@id(name: "allocationId", [projectId, userId, allocationGroupId, allocationSubGroupId, allocationInstanceId])
     @@unique([userId, allocationGroupId, allocationSubGroupId, allocationInstanceId])
+}
+
+model ProjectAllocationReader {
+    id                   String            @id @default(uuid())
+    readerId             String            @map("reader_id")
+    studentId            String            @map("student_id")
+    projectId            String            @map("project_id")
+    allocationGroupId    String            @map("allocation_group_id")
+    allocationSubGroupId String            @map("allocation_sub_group_id")
+    allocationInstanceId String            @map("allocation_instance_id")
+    reader               UserInInstance    @relation(fields: [readerId, allocationGroupId, allocationSubGroupId, allocationInstanceId], references: [userId, allocationGroupId, allocationSubGroupId, allocationInstanceId], onDelete: Cascade)
+    projectAllocation    ProjectAllocation @relation(fields: [projectId, studentId, allocationGroupId, allocationSubGroupId, allocationInstanceId], references: [projectId, userId, allocationGroupId, allocationSubGroupId, allocationInstanceId], onDelete: Cascade)
 }
 
 model Flag {

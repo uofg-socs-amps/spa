@@ -1,3 +1,4 @@
+import { readerRouter } from "./routers/(marking)/reader";
 import { accessControlRouter } from "./routers/access-control";
 import { institutionRouter } from "./routers/institution";
 import { projectRouter } from "./routers/project";
@@ -9,6 +10,7 @@ export const appRouter = createTRPCRouter({
   user: userRouter,
   institution: institutionRouter,
   ac: accessControlRouter,
+  reader: readerRouter,
 });
 
 export type AppRouter = typeof appRouter;

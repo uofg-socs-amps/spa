@@ -11,6 +11,7 @@ import {
   FolderOutputIcon,
   HomeIcon,
   LayersIcon,
+  LibraryIcon,
   ListChecksIcon,
   MergeIcon,
   MousePointerSquareIcon,
@@ -61,6 +62,9 @@ export function Icon({ type }: { type: string }) {
 
     case "layers":
       return <LayersIcon className="mr-2 h-4 w-4" />;
+
+    case "library":
+      return <LibraryIcon className="mr-2 h-4 w-4" />;
 
     case "list-checks":
       return <ListChecksIcon className="mr-2 h-4 w-4" />;

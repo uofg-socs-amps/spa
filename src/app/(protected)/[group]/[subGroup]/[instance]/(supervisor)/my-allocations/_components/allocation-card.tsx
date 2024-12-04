@@ -23,7 +23,7 @@ type ProjectCardProps = {
 
 export function AllocationCard({ title, student }: ProjectCardProps) {
   return (
-    <Card className="w-full overflow-hidden">
+    <Card className="w-full max-w-3xl overflow-hidden">
       <CardHeader className="bg-accent p-4">
         <CardTitle className="text-wrap text-lg font-semibold leading-tight">
           {title}

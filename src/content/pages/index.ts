@@ -167,6 +167,11 @@ export const pages = {
     href: "my-allocations",
     icon: "folder-check",
   },
+  readerProjects: {
+    title: "Reader Projects",
+    href: "reader-projects",
+    icon: "library",
+  },
 
   myPreferences: {
     title: "My Preferences",

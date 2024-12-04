@@ -68,7 +68,11 @@ function supervisorOnlyTabs(instance: AllocationInstance) {
     [Stage.PROJECT_SELECTION]: [pages.myProjects, pages.newProject],
     [Stage.PROJECT_ALLOCATION]: [pages.myProjects],
     [Stage.ALLOCATION_ADJUSTMENT]: [pages.myProjects],
-    [Stage.ALLOCATION_PUBLICATION]: [pages.myProjects, ...myAllocationsTab],
+    [Stage.ALLOCATION_PUBLICATION]: [
+      pages.myProjects,
+      ...myAllocationsTab,
+      pages.readerProjects,
+    ],
   };
   return tabs[instance.stage];
 }
